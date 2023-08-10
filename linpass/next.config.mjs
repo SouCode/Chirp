@@ -18,5 +18,5 @@ const config = {
     defaultLocale: "en",
   },
 };
-
+// Test
 export default config;
