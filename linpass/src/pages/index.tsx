@@ -2,7 +2,11 @@ import {type NextPage } from "next";
 
 
 const Home: NextPage = () => {
-  return <h1>Hi</h1>
+  return <>
+  <header>
+    <h1 className="mb-2 px-4 test-lg font-bold">Home</h1>
+  </header>  
+  </>;
 
 };
 
