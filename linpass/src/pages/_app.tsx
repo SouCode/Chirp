@@ -5,8 +5,7 @@ import { type AppType } from "next/app";   // Type definition for Next.js custom
 import { api } from "~/utils/api";   // Import the API utility you've set up
 import "~/styles/globals.css";  // Global styles for your application
 import Head from "next/head";  // Component for appending elements to the <head> of the page
-import Link from "next/link";  // Component for client-side navigation
-import { SideNav } from "components/SideNav";  // Your custom SideNav component
+import { SideNav } from "~/components/SideNav";
 
 // Define your custom App component which wraps around all other Next.js pages
 const MyApp: AppType<{ session: Session | null }> = ({

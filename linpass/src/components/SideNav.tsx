@@ -6,7 +6,7 @@ export function SideNav() {
     const user = session.data?.user;
 
     return (
-        <nav className="w-64 sticky top-0 px-4 py-4 mt-10 text-2xl">
+        <nav className="w-40 sticky top-0 px-5 py-4 mt-10 text-lg">
             <ul className="gap-2">
                 <li>
                     <Link href="/">Home</Link>
