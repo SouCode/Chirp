@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { signOut, signIn, useSession } from "next-auth/react";
 
@@ -6,7 +7,7 @@ export function SideNav() {
     const user = session.data?.user;
 
     return (
-        <nav className="w-40 sticky top-0 px-5 py-4 mt-10 text-lg">
+        <nav className="w-40 sticky top-0 px-5 py-4 mt-10 text-lg text-center"> {/* Add 'text-center' class */}
             <ul className="gap-2">
                 <li>
                     <Link href="/">Home</Link>
