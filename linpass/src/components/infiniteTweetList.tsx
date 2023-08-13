@@ -103,11 +103,11 @@ function HeartButton({ likedByMe, likeCount }: HeartButtonProps) {
     return (
         <button
             className={`mb-1 mt-1 flex items-center gap-3 self-start transition-colors
-                duration-200 ${
+                duration-200 -ml-2 ${
                     likedByMe
                         ? "text-red-500"
                         : "text-gray-500 hover:text-red-500 focus-visible:text-red-500"
-                }`}
+                }`}  
         >
             <IconHoverEffect red>
                 <HeartIcon
