@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { NextPage } from "next";
 import { NewTweetForm } from "~/components/NewTweetForm";
 import { InfiniteTweetList } from "~/components/infiniteTweetList";
