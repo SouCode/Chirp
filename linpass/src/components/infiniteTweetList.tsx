@@ -3,6 +3,7 @@ import { ProfileImage } from "./ProfileImage";
 import Link from "next/link";
 import { VscHeart, VscHeartFilled } from "react-icons/vsc";
 import { useSession } from "next-auth/react";
+import { IconHoverEffect } from "./iconHoverEffect";
 
 type Tweet = {
     id: string;
@@ -108,13 +109,15 @@ function HeartButton({ likedByMe, likeCount }: HeartButtonProps) {
                         : "text-gray-500 hover:text-red-500 focus-visible:text-red-500"
                 }`}
         >
-            <HeartIcon
-                className={`transition-colors duration-200 ${
-                    likedByMe
-                        ? "fill-red-500"
-                        : "group-hover:fill-red-500 group-focus-visible:fill-red-500"
-                }`}
-            />
+            <IconHoverEffect red>
+                <HeartIcon
+                    className={`transition-colors duration-200 ${
+                        likedByMe
+                            ? "fill-red-500"
+                            : "group-hover:fill-red-500 group-focus-visible:fill-red-500"
+                    }`}
+                />
+            </IconHoverEffect>
             <span>{likeCount}</span>
         </button>
     );
