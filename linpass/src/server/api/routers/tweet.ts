@@ -4,6 +4,8 @@
 import { type Prisma } from "@prisma/client";
 import { type inferAsyncReturnType } from "@trpc/server";
 import { z } from "zod";
+import Filter from 'bad-words';
+
 
 import {
   createTRPCRouter,
@@ -11,6 +13,9 @@ import {
   protectedProcedure,
   type createTRPCContext,
 } from "~/server/api/trpc";
+
+const filter = new Filter();
+filter.addWords('baddyword1', 'baddyword2'); // add custom words to the filter here
 
 export const tweetRouter = createTRPCRouter({
   infiniteProfileFeed: publicProcedure
@@ -58,6 +63,11 @@ export const tweetRouter = createTRPCRouter({
   create: protectedProcedure
     .input(z.object({ content: z.string() }))
     .mutation(async ({ input: { content }, ctx }) => {
+      // Check for profanity
+      if (filter.isProfane(content)) {
+        throw new Error('Your tweet contains inappropriate language.');
+      }
+
       const tweet = await ctx.prisma.tweet.create({
         data: { content, userId: ctx.session.user.id },
       });
