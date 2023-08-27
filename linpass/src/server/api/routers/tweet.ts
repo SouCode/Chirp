@@ -76,6 +76,26 @@ export const tweetRouter = createTRPCRouter({
 
       return tweet;
     }),
+
+    delete: protectedProcedure // New delete tweet functionality
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input: { id }, ctx }) => {
+      // Check if the tweet belongs to the current user
+      const tweet = await ctx.prisma.tweet.findUnique({
+        where: { id },
+        select: { userId: true }
+      });
+
+      if (!tweet || tweet.userId !== ctx.session.user.id) {
+        throw new Error('You do not have permission to delete this tweet.');
+      }
+
+      // Delete the tweet
+      await ctx.prisma.tweet.delete({ where: { id } });
+
+      return { success: true };
+    }),
+    
   toggleLike: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input: { id }, ctx }) => {

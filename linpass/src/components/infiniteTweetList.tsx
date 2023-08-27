@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -112,8 +116,22 @@ function TweetCard({
     },
   });
 
+  const deleteTweet = api.tweet.delete.useMutation();
+
+
   function handleToggleLike() {
     toggleLike.mutate({ id });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  async function handleDeleteTweet() {
+    try {
+      await deleteTweet.mutateAsync({ id });
+      window.location.reload();
+      alert('Tweet deleted successfully!');
+    } catch (error) {
+      alert('Failed to delete the tweet. Please try again.');
+    }
   }
 
   return (
@@ -141,6 +159,10 @@ function TweetCard({
           likedByMe={likedByMe}
           likeCount={likeCount}
         />
+        {/* Add the delete button next to the HeartButton */}
+        <button onClick={handleDeleteTweet}>
+            🗑️ {/* You can replace this with an icon */}
+        </button>
       </div>
     </li>
   );
