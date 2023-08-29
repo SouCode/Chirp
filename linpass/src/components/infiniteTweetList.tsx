@@ -161,7 +161,7 @@ function TweetCard({
         />
         {/* Add the delete button next to the HeartButton */}
         <button onClick={handleDeleteTweet}>
-            🗑️ {/* You can replace this with an icon */}
+             ❌{/* You can replace this with an icon */}
         </button>
       </div>
     </li>

@@ -14,6 +14,8 @@ import {
   type createTRPCContext,
 } from "~/server/api/trpc";
 
+import { isSpam } from "~/utils/spamDetection";
+
 const filter = new Filter();
 filter.addWords('baddyword1', 'baddyword2'); // add custom words to the filter here
 
@@ -66,6 +68,11 @@ export const tweetRouter = createTRPCRouter({
       // Check for profanity
       if (filter.isProfane(content)) {
         throw new Error('Your tweet contains inappropriate language.');
+      }
+
+       // Check for spam using the utility
+      if (isSpam(content)) {
+        throw new Error('Your tweet contains spammy content. Please refrain from posting promotional or repetitive messages.');
       }
 
       const tweet = await ctx.prisma.tweet.create({
